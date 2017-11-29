@@ -1,0 +1,13 @@
+{
+    "name": "express-t",
+    "version": "1.0.0",
+    "description": "express搭建后台",
+    "main": "app.js",
+    "scripts": {},
+    "author": "sun",
+    "license": "ISC",
+    "devDependencies": {},
+    "dependencies": {
+        "express": "^4.16.2"
+    }
+}

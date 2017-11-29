@@ -8,6 +8,15 @@
     "license": "ISC",
     "devDependencies": {},
     "dependencies": {
-        "express": "^4.16.2"
+        "body-parser": "^1.18.2",
+        "compress": "^0.99.0",
+        "cookie-parser": "^1.4.3",
+        "errorhandler": "^1.5.0",
+        "express": "^4.16.2",
+        "express-session": "^1.15.6",
+        "json": "^9.0.6",
+        "morgan": "^1.9.0",
+        "query": "^0.2.0",
+        "static": "^2.0.0"
     }
 }

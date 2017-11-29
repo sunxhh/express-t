@@ -2,7 +2,7 @@
 expresd搭建后台
 数据库 mysql
 记录日志 morgan
-
+npm i --save body-parser json compress cookie-parser express-session errorhandler morgan query static
 basicAuth 
 （app.use(connect.basicAuth)();）
 提供基本的访问授权。记住，basic-auth 只提供最基本的安全，并且你只能通过HTTPS

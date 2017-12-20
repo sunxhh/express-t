@@ -1,21 +1,21 @@
 var express = require('express');
 var app = express();
 
+var routes = require('./server/routes/index');
+
 app.set('port', process.env.PORT || 3000);
+
+// 进路由主控制
+routes(app);
+
 // 定制404 页面
 app.use(function(req, res) {
     res.type('text/plain');
     res.status(404);
     res.send('404 - Not Found');
 });
-// 定制500 页面
-app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.type('text/plain');
-    res.status(500);
-    res.send('500 - Server Error');
-});
+
+
 app.listen(app.get('port'), function() {
-    console.log('Express started on http://localhost:' +
-        app.get('port') + '; press Ctrl-C to terminate.');
+    console.log(`服务启动 http://localhost: ${app.get('port')} ;`);
 });

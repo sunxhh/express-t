@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 
-router.use('/upload/uploadFile', function(req, res, next) {
-
+router.post('/uploadFile', function (req, res, next) {
+    res.send("aaaa");
 });
 
 module.exports = router;

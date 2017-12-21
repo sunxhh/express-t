@@ -6,7 +6,13 @@
     "scripts": {},
     "author": "sun",
     "license": "ISC",
-    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sunxhh/express-t.git"
+    },
+    "devDependencies": {
+        "jshint": "^2.9.5"
+    },
     "dependencies": {
         "body-parser": "^1.18.2",
         "compress": "^0.99.0",

@@ -3,10 +3,10 @@ let app = express();
 
 app.set('port', process.env.PORT || 3000);
 
+
 // 处理请求参数
 let bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded());
 
 // 进入路由
 let routes = require('./routes/index');

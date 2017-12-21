@@ -1,11 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var upload = require('../../controllers/upload/upload');
-var slice = require("../../lib/common").slice;
+let express = require('express');
+let router = express.Router();
 
+let upload = require('../../controllers/upload/upload');
+let slice = require("../../lib/common").slice;
 
-router.all('/uploadFile', function(req, res, next) {
-    upload.uploadFile.apply(null, slice(arguments));
+let allowAccess = require("../../middlewares/allowAccess").allowAccess;
+let multipart = require('connect-multiparty');
+let multipartMiddleware = multipart();
+
+router.all('/uploadFile', allowAccess, multipartMiddleware, function(req, res, next) {
+    upload.uploadFile(req, res, next);
 });
 
 

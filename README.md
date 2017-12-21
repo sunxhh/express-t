@@ -100,6 +100,6 @@ Connect 3.0 中会被移除。你应该用Busboy 或Formidable 代替它（见�
 详情请参见第16 章。
 
 • vhost
-（npm install --save vhost, var vhost = require(vhost);）
+（npm install --save vhost, let vhost = require(vhost);）
 虚拟主机（vhost），这个术语是从Apache 借来的，它可使子域名在Express 中更容易管
 理。详情请参见第14 章。

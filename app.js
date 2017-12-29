@@ -6,7 +6,16 @@ app.set('port', process.env.PORT || 3000);
 
 // 处理请求参数
 let bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded());
+// 请求最大值
+let maxRequest = "50mb";
+// 请求单个参数的最大值
+let maxParam = 1024 * 1024 * 10;
+app.use(bodyParser.json({ limit: maxRequest }));
+app.use(bodyParser.urlencoded({
+    limit: maxRequest,
+    extended: false,
+    parameterLimit: maxParam
+}));
 
 // 进入路由
 let routes = require('./routes/index');

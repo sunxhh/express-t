@@ -1,6 +1,8 @@
 let upload = require("./upload/uploadRoute");
+let test = require("./test/test");
 module.exports = function(app) {
     app.use("/upload", upload);
+    app.use("/test", test);
     addMiddleWares(app);
 };
 

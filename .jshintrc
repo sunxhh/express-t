@@ -3,7 +3,7 @@
     "unused": true,
     "predef": [],
     "esversion": 6,
-    "varstmt": true,
+    "varstmt": false,
     "browser": true,
     "node": true
 }

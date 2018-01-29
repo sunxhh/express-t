@@ -4,10 +4,8 @@ let router = express.Router();
 let upload = require('../../controllers/upload/upload');
 
 let allowAccess = require("../../middlewares/allowAccess").allowAccess;
-let multipart = require('connect-multiparty');
-let multipartMiddleware = multipart();
 
-router.all('/uploadFile', allowAccess, multipartMiddleware, function(req, res, next) {
+router.all('/uploadFile', allowAccess, function (req, res, next) {
     upload.uploadFile(req, res, next);
 });
 

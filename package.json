@@ -1,9 +1,11 @@
 {
     "name": "express-t",
     "version": "1.0.0",
-    "description": "express搭建后台",
+    "description": "expressDemo",
     "main": "app.js",
-    "scripts": {},
+    "scripts": {
+        "b": "node app.js"
+    },
     "author": "sun",
     "license": "MIT",
     "repository": {

@@ -1,57 +1,68 @@
-var parsePostBody = function (req, done) {
-    var arr = [];
-    var chunks;
-
-    req.on('data', (buff) => {
-        arr.push(buff);
-    });
-
-    req.on('end', () => {
-        chunks = Buffer.concat(arr);
-        done(chunks);
-    });
-};
-
 var parsers = Object.create(null);
-
-module.exports = function (req, res, next) {
-    parsePostBody(req, (chunks) => {
-        var body = chunks.toString();
-        body = body.split("\r\n");
-        req.__body = body;
+var contentTypeList = ["multipart"];
+exports = module.exports = function(req, res, next) {
+    let contentType = req.headers['content-type'];
+    contentType = getContenType(contentType);
+    if (!contentType) {
         next();
-    });
+        return;
+    }
+    exports[contentType](req, res, next);
 };
+
+function getContenType(contentType) {
+    for (var type of contentTypeList) {
+        if (contentType && ~contentType.indexOf(type)) {
+            return type;
+        }
+    }
+    return "";
+}
+
+Object.defineProperty(exports, 'json', {
+    configurable: true,
+    enumerable: true,
+    get: createParserGetter('json')
+});
+
+Object.defineProperty(exports, 'multipart', {
+    configurable: true,
+    enumerable: true,
+    get: createParserGetter('multipart')
+});
+
+Object.defineProperty(exports, 'urlencoded', {
+    configurable: true,
+    enumerable: true,
+    get: createParserGetter('urlencoded')
+});
 
 
 
 function createParserGetter(name) {
     return function get() {
-        return loadParser(name)
-    }
+        return loadParser(name);
+    };
 }
 
 
 
 function loadParser(parserName) {
-    var parser = parsers[parserName]
+    var parser = parsers[parserName];
 
     if (parser !== undefined) {
-        return parser
+        return parser;
     }
     switch (parserName) {
         case 'json':
-            parser = require('./lib/types/json')
-            break
-        case 'raw':
-            parser = require('./lib/types/raw')
-            break
-        case 'text':
-            parser = require('./lib/types/text')
-            break
+            parser = require('./types/json');
+            break;
+        case 'multipart':
+            parser = require('./types/multipart');
+            break;
         case 'urlencoded':
-            parser = require('./lib/types/urlencoded')
-            break
+            parser = require('./types/urlencoded');
+            break;
     }
-    return (parsers[parserName] = parser)
+    return (parsers[parserName] = parser);
 }

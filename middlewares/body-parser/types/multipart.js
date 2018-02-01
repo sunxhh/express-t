@@ -8,7 +8,7 @@ let getBoundary = function(req) {
 };
 
 let getOneParam = function(param) {
-    let ContentDisposition = new RegExp("^Content-Disposition:([\s\S]*)\n");
+    let ContentDisposition = new RegExp("^(Content-Disposition(([^\n\r].)*?))(\r\n|\n)");
 }
 
 let handleParam = function(req, chunks) {

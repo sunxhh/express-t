@@ -1,4 +1,5 @@
 let express = require('express');
+let common = require('./lib/common');
 let app = express();
 
 app.set('port', process.env.PORT || 3000);

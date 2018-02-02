@@ -1,14 +1,41 @@
 let parsePostBody = require("../parseBody").parsePostBody;
+let strUnit = require("../../../lib/string");
 // 获取boundary的值
 let getBoundary = function(req) {
     let contentType = req.headers['content-type'];
     let boundary = contentType.split("boundary=")[1] || "";
-    boundary = boundary.replace(/-/g, "");
+    if (boundary) {
+        boundary = boundary.replace(/-/g, "");
+    }
     return boundary;
 };
-
-let getOneParam = function(param) {
-    let ContentDisposition = new RegExp("^(Content-Disposition(([^\n\r].)*?))(\r\n|\n)");
+// 获取name 以及 文件名
+let getContentDisposition = function(param, data) {
+    let reg = new RegExp("(Content-Disposition(.*?))(\r\n|\n)");
+    let valReg = new RegExp("(;[\\s*](\\S+)=\"(\\S+)\")+?", 'g');
+    return param.replace(reg, function(o, n) {
+        n.replace(valReg, function() {
+            let arg = arguments;
+            data[arg[2]] = arg[3];
+        });
+        return "";
+    });
+};
+// 获取content-type
+let getContentType = function(param, data) {
+    param.replace(/^\s/g, "");
+    let reg = new RegExp("(Content-Type(.*?))(\r\n|\n)");
+    return param.replace(reg, function(o, n) {
+        let list = n.split(":");
+        data[strUnit.trim(list[0])] = strUnit.trim(list[1]);
+        return "";
+    });
+};
+// 获取值
+let getContentValue = function(param, data) {
+    let reg = new RegExp("(^((\\r\\n)|(\\n)))|(((\\r\\n)|(\\n))$)", "g");
+    param = param.replace(reg, "");
+    return (data.value = param);
 }
 
 let handleParam = function(req, chunks) {
@@ -23,11 +50,17 @@ let handleParam = function(req, chunks) {
         }
         return false;
     });
+    
     param.forEach((par) => {
-        par = getOneParam(par);
-        _body[par.name] = par.value;
+        let cBody = {};
+        par = getContentDisposition(par, cBody);
+        par = getContentType(par, cBody);
+        par = getContentValue(par, cBody);
+        if (cBody.name) {
+            _body[cBody.name] = cBody;
+        }
     });
-    return _body;
+    req.body = _body;
 };
 
 
@@ -35,6 +68,7 @@ let handleParam = function(req, chunks) {
 module.exports = function(req, res, next) {
     parsePostBody(req, (chunks) => {
         handleParam(req, chunks);
-        res.send({ a: "aaa" });
+        req.originQuery = chunks;
+        next();
     });
 };

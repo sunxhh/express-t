@@ -1,5 +1,5 @@
 # express
-expresd搭建后台Demo
+expresd搭建后台
 
 
 
@@ -38,9 +38,10 @@ x-www-form-urlencoded，这种编码可以被urlencoded 中间件解析），但
 解析互联网媒体类型为application/x-www-form-urlencoded 的请求体。这是处理表单
 和AJAX 请求最常用的方式。
 
-• multipart（已废弃）
+• multipart
 解析互联网媒体类型为multipart/form-data 的请求体。这个中间件已被废弃了，并在
 Connect 3.0 中会被移除。你应该用Busboy 或Formidable 代替它（见第8 章）。
+
 
 • compress
 （app.use(connect.compress);）

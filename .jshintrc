@@ -1,7 +1,7 @@
 {
     "undef": true,
     "unused": true,
-    "predef": [],
+    "predef": ["async", "await"],
     "esversion": 6,
     "varstmt": false,
     "browser": true,

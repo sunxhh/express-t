@@ -1,10 +1,23 @@
 let mysql = require('mysql');
 let dbConfig = require("./sqlConfig").dbConfig;
-var connection = mysql.createConnection(dbConfig);
+let pool = mysql.createPool(dbConfig);
 
-// connection.connect();
+module.exports = pool;
+pool.getConnection(function (err, connection) {
+    // Use the connection
+    connection.query('SELECT something FROM sometable', function (error, results, fields) {
+        // And done with the connection.
+        connection.release();
 
-// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//     if (error) throw error;
-//     console.log('The solution is: ', results[0].solution);
-// });
+        // Handle error after the release.
+        if (error) throw error;
+
+        // Don't use the connection here, it has been returned to the pool.
+    });
+});
+let a = async function () {
+    const f1 = await readFile('/etc/fstab');
+    const f2 = await readFile('/etc/shells');
+    console.log(f1.toString());
+    console.log(f2.toString());
+};

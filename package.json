@@ -13,7 +13,9 @@
         "url": "https://github.com/sunxhh/express-t.git"
     },
     "devDependencies": {
-        "jshint": "^2.9.5"
+        "eslint": "^4.17.0",
+        "jshint": "^2.9.5",
+        "jshint-esnext": "^2.7.0-3"
     },
     "dependencies": {
         "body-parser": "^1.18.2",

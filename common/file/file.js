@@ -17,8 +17,8 @@ let isExist = function() {
 
 /**
  * 创建文件夹
- * @param {*} path 
- * @param {*} callback 
+ * @param {path}  
+ * @param {callback}  
  */
 let createFolder = function(path, callback) {
     isExist(path, function(exist) {

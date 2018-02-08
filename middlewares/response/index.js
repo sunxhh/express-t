@@ -1,11 +1,10 @@
 exports = module.exports = function(req, res, next) {
-    res.originSend = res.send;
-    res.send = function(data) {
+    res.sendJSON = function(data) {
         let response = {
             code: 200,
             data: data
         }
-        res.originSend(JSON.stringify(response));
+        res.send(JSON.stringify(response));
     }
     next();
 };

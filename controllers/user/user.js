@@ -7,9 +7,9 @@ exports.addUser = function(req, res, next) {
 
 exports.getUsers = function(req, res, next) {
     user.getUsers().then((result) => {
-        res.send(result);
+        res.sendJSON(result);
     }).catch((result) => {
-        res.send(result);
+        res.sendJSON(result);
     });
 };
 

@@ -4,9 +4,13 @@ let app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-let bodyParser = require('./middlewares/body-parser/index');
 // 处理请求
+let bodyParser = require('./middlewares/body-parser/index');
 app.use(bodyParser);
+
+// 处理res返回值
+let response = require('./middlewares/response/index');
+app.use(response);
 
 // 进入路由
 let routes = require('./routes/index');

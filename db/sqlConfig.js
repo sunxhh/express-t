@@ -3,6 +3,5 @@ exports.dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'test',
-    charset: 'utf-8'
+    database: 'test'
 };

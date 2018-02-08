@@ -1,4 +1,4 @@
 exports.getUsers = function(data) {
-    let sql = `select * of user`;
+    let sql = `select * from user`;
     return sql;
 }

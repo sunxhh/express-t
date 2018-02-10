@@ -1,6 +1,6 @@
 var parsers = Object.create(null);
-var contentTypeList = ["multipart"];
-exports = module.exports = function(req, res, next) {
+var contentTypeList = ["multipart", "urlencoded"];
+exports = module.exports = function (req, res, next) {
     let contentType = req.headers['content-type'];
     contentType = getContenType(contentType);
     if (!contentType) {

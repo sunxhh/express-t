@@ -10,7 +10,7 @@ let parseUrlencode = function (str) {
         }
     });
     return param;
-}
+};
 
 function urlSearch(req) {
     let json = {};

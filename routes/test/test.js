@@ -4,8 +4,8 @@ let router = express.Router();
 
 let allowAccess = require("../../middlewares/allowAccess").allowAccess;
 
-router.all('/test1', allowAccess, function(req, res, next) {
-    res.send(req.__body);
+router.all('/test1', allowAccess, function(req, res) {
+    res.sendJSON(req.body);
 });
 
 

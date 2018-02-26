@@ -11,7 +11,6 @@ const jsonp = {
         return `${callbackName}(${responseString})`;
     }
 };
-let text = 1;
 exports = module.exports = function(req, res, next) {
     res.sendJSON = function(data) {
         let response = {
